@@ -1,0 +1,139 @@
+{% include 'imports.html' %}
+
+<!-- Logo and dropdown -->
+<div>
+  <a id="logo" href="/">Carlano</a>
+</div>
+
+
+<h1 class="centered-text" align="center" style="margin-bottom: 10px;">{{ course }} Quiz</h1>
+
+<style>
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .main-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    font-family: Arial, sans-serif;
+  }
+
+  #form-container {
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: transparent;
+  }
+
+  #form-container h2 {
+    text-align: left;
+    margin-bottom: 10px;
+  }
+
+  #form-container input[type="text"],
+  #form-container input[type="password"],
+  #form-container textarea {
+    width: 100%;
+    margin-bottom: 15px;
+    border: 1px solid #ffffff;
+    border-radius: 11px;
+    resize: vertical;
+  }
+
+  #form-container #btn-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+  }
+
+  #form-container #btn-container button {
+    width: 48%;
+    padding: 12px;
+    border: none;
+    border-radius: 11px;
+    background-color: #fff;
+    color: #002147;
+    cursor: pointer;
+  }
+
+  #form-container #btn-container button:hover {
+    background-color: #fff;
+  }
+
+  #form-container #btn-container button:focus {
+    outline: none;
+  }
+
+  #form-container #centered-text {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  #form-container #full-width-text {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+
+  #form-container #full-width-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 11px;
+    background-color: rgb(0, 105, 255);
+    color: #ffffff;
+    cursor: pointer;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    font-size: large;
+  }
+
+  #form-container #full-width-btn:focus {
+    outline: none;
+  }
+</style>
+</head>
+
+<body>
+  <form class="main-form" method="post">
+    <div id="form-container">
+
+      <input type="hidden" name="question_index" value="{{ question_index }}">
+      <p style="font-size: large;">{{ question.question }}</p><br>
+      {% for option in question.options %}
+      <p
+        style="background-color: rgb(255, 255, 255);margin-bottom: 10px;padding: 12px;box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;border-radius: 11px;">
+        <label style="font-size: 18px;">
+          <input type="radio" name="answer" value="{{ option }}" class="radio-md" style="outline: none;">
+          {{ option }}
+        </label><br>
+      </p>
+      {% endfor %}
+      <br>
+      <button type="submit" class="btn" id="full-width-btn">Next&nbsp;<i class="fa-solid fa-arrow-right"
+          style="font-size: large;"></i></button>
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <ul>
+    {% for message in messages %}
+    <li style="color: rgb(102, 0, 128);animation: fadeOut 3s forwards;">{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% endwith %}
+</div>
+</form>
+
+  </div>
+
+
+  {% include 'footer.html' %}
