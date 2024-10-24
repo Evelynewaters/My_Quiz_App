@@ -2,7 +2,7 @@
 file to run the website
 """
 
-from website import create_app
+from my_website import create_app
 
 app = create_app()
 
